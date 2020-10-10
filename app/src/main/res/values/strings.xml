@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">calculator</string>
+    <string name="name">Name</string>
+    <string name="valueinput">0</string>
+    <string name="division">/</string>
+    <string name="multiplication">X</string>
+    <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="clearall">CE</string>
+    <string name="decimal">.</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="equals">=</string>
+    <string name="bracketopen">(</string>
+    <string name="bracketclose">)</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="log">log</string>
+    <string name="mod">mod</string>
+    <string name="_0">0</string>
+    <string name="maximumdata"><![CDATA[between 50 & 500]]></string>
+    <string name="data_points">Data Points</string>
+    <string name="rate_of_x">Rate of X</string>
+    <string name="between_0_05_0_15"><![CDATA[between 0.05 & 0.15]]></string>
+    <string name="create">create</string>
+    <string name="todo">TODO</string>
+    <string name="del">del</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    <string name="valueinput">0</string>-->
+
+</resources>
