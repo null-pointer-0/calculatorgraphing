@@ -15,51 +15,50 @@ import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_graph_activity.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.ArrayList
+import org.mariuszgromada.math.mxparser.Argument
+import org.mariuszgromada.math.mxparser.Expression
+import org.mariuszgromada.math.mxparser.Function
+
 
 class graph_activity : AppCompatActivity() {
-//    var x:Double = 0.0
-    lateinit var myhelper:myHelper
-    lateinit var sqLiteDatabase: SQLiteDatabase
-    lateinit var rateinput:View
-    lateinit var datainput:View
     lateinit var series: LineGraphSeries<DataPoint>
     lateinit var graph:GraphView
-//    lateinit var creating: Button
+    lateinit var f:Function
+    var d:Double = -0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph_activity)
-        myhelper = myHelper(this);
-        sqLiteDatabase = myhelper.getWritableDatabase();
-
-        execGraph()
+//        getInput()
+         execGraph()
     }
-    private fun execGraph() {
+    override fun onResume(){
+        super.onResume()
+//        graph.addSeries(series)
+    }
+    fun execGraph() {
         var bt:Button  = findViewById(R.id.Show)
+        graph = findViewById(R.id.g)
+        series = LineGraphSeries<DataPoint>()
+        var bl:Bundle ?= intent.extras
+        var str:String ?= intent.getStringExtra("Function")
+        var first:String = "f(x) = "
+        var fin:String = first+str
+        Toast.makeText(this, fin + "get this", Toast.LENGTH_SHORT).show()
+        f = Function(fin)
         bt.setOnClickListener {
-            rateinput = findViewById(R.id.rateofgraph)
-            val rt: Double = rateinput.toString().toDouble()
-            datainput = findViewById(R.id.pointsongraph)
-            val points: Int = datainput.toString().toInt()
-            var x:Double = 0.0
-            for (i in 0..points) {
-                val y = Math.sin(x) + Math.cos(x)
-                myhelper.insert(x, y)
-                x += rt
+            for(i in 0..150){
+                var argVal:String = d.toString()
+                var argFun:String = "x="
+                argFun = argFun+argVal
+                var x:Argument = Argument(argFun)
+                var e1:Expression = Expression("f(x)",f,x)
+                var res:Double = e1.calculate()
+                var dp:DataPoint = DataPoint(d,res)
+                series.appendData(dp,true,150)
+                d+=0.08
             }
-            series = LineGraphSeries<DataPoint>(getData())
+            Toast.makeText(this, "Graph Being Created", Toast.LENGTH_SHORT).show()
             graph.addSeries(series)
         }
-    }
-
-    private fun getData(): Array<DataPoint>? {
-        var st = arrayOf<String>("xvalues","yvalues")
-        var crsr: Cursor = sqLiteDatabase.query("Mytable",st,null,null,null,null,null)
-        var d:DataPoint = DataPoint(0.0,0.0)
-        var dp=Array<DataPoint>(crsr.getCount()){d}
-        for(i in 0..crsr.getCount()){
-            dp[i] = DataPoint(crsr.getDouble(0).toDouble(),crsr.getInt(1).toDouble())
-            crsr.moveToNext()
-        }
-        return dp
     }
 }

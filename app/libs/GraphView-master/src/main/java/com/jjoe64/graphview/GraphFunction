@@ -1,0 +1,12 @@
+import com.jjoe64.graphview.function;
+
+class GraphFunction{
+    private Function f;
+    private int color;
+    GraphFunction(Function f,int color){
+        this.f=f;
+        this.color=color;
+    }
+    Function getFunction(){return f;}
+    public int getColor(){return color;}
+}

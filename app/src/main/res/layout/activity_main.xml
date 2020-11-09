@@ -7,6 +7,7 @@
     android:layout_rowWeight="@android:dimen/thumbnail_width"
     android:layout_columnWeight="4"
     android:clipToPadding="false"
+
     tools:context=".MainActivity">
 
     <LinearLayout
